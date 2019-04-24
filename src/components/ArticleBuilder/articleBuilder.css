@@ -1,0 +1,66 @@
+.title,
+.header {
+  color: #23282e;
+  font-size: 40px;
+  line-height: 50px;
+  font-weight: 400;
+  font-family: "Source Sans Pro";
+}
+
+.header {
+  font-size: 30px;
+  margin: 10px 0px;
+  color: #23282e;
+}
+
+.date,
+.paragraph {
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 400;
+  font-weight: 300;
+  color: #333333;
+}
+
+.date {
+  color: #e36208;
+}
+
+.code {
+  background-color: #f7f7f7;
+  width: calc(100% - 20px);
+  font-size: 18px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.DraftEditor-root figure iframe {
+  width: 200%;
+}
+
+iframe {
+  width: 110% !important;
+  left: -40px !important;
+}
+
+@media (max-width: 700px) {
+  .title,
+  .header {
+    letter-spacing: -1px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .header {
+    font-size: 25px;
+    line-height: 35px;
+  }
+
+  .date,
+  .paragraph {
+    font-size: 18px;
+  }
+}

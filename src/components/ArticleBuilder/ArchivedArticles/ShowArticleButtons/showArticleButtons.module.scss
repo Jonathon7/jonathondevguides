@@ -1,0 +1,12 @@
+.showArticlesCont {
+  display: flex;
+  justify-content: space-around;
+
+  p {
+    cursor: pointer;
+  }
+}
+
+.active {
+  border-bottom: solid 1px #343434;
+}

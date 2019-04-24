@@ -1,0 +1,22 @@
+.buttonsCont {
+  height: 30px;
+  margin-left: 20px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    border-radius: 5px;
+    padding: 5px;
+    width: 70px;
+    color: #e36208;
+
+    cursor: pointer;
+  }
+
+  button:nth-of-type(2) {
+    background-color: #343434;
+    color: white;
+  }
+}
