@@ -4,7 +4,7 @@ const { json } = require("body-parser");
 const massive = require("massive");
 const session = require("express-session");
 const path = require("path");
-const PORT = 3002;
+const PORT = 3003;
 const {
   getArticles,
   getArticle,
