@@ -97,7 +97,6 @@ export default class Navbar extends Component {
       default:
         return null;
     }
-
     return (
       <div className={styles.navCont}>
         <div
