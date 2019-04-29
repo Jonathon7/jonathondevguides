@@ -3,6 +3,7 @@ import ArticleListTemplate from "../ArticleListTemplate/ArticleListTemplate";
 import styles from "./articlesList.module.scss";
 import getArticles from "../AsyncFunctions/getArticles";
 import propTypes from "prop-types";
+// import Canvas from '../'
 
 class ArticleList extends Component {
   state = {

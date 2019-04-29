@@ -117,13 +117,17 @@ export default class ArticleBuilder extends Component {
       });
     }
 
+    if (!status) {
+      return this.setState({ status: "saved" });
+    }
+
     let article = await postArticle({
       title: content.blocks[0].text,
       date: content.blocks[1].text,
       description: content.blocks[2].text,
       content: JSON.stringify(content),
       id: this.state.articleId,
-      status: status || this.state.status
+      status: status
     });
 
     if (article.data[0]) {

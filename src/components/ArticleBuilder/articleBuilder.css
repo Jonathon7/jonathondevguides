@@ -41,12 +41,14 @@
 iframe {
   width: 110% !important;
   left: -40px !important;
+  overflow: auto !important;
 }
 
 @media (max-width: 700px) {
   .title,
   .header {
-    letter-spacing: -1px;
+    /* letter-spacing: -1px; */
+    font-family: "Proxima Nova W05 Regular";
   }
 
   .title {
