@@ -3,7 +3,7 @@
   color: #23282e;
   font-size: 40px;
   line-height: 50px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: "Source Sans Pro";
 }
 
@@ -17,13 +17,12 @@
 .paragraph {
   font-size: 18px;
   line-height: 32px;
-  font-weight: 400;
   font-weight: 300;
   color: #333333;
 }
 
 .date {
-  color: #e36208;
+  color: #2196f3;
 }
 
 .code {
@@ -42,13 +41,13 @@ iframe {
   width: 110% !important;
   left: -40px !important;
   overflow: auto !important;
+  position: absolute !important;
 }
 
 @media (max-width: 700px) {
   .title,
   .header {
-    /* letter-spacing: -1px; */
-    font-family: "Proxima Nova W05 Regular";
+    /* font-family: "Proxima Nova W05 Regular"; */
   }
 
   .title {

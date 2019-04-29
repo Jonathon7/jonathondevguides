@@ -17,7 +17,8 @@ const styleMap = {
     padding: "0px 6px",
     margin: "0px 1px",
     color: "#e36208",
-    borderRadius: "5px"
+    borderRadius: "5px",
+    fontFamily: "Inconsolata"
   }
 };
 

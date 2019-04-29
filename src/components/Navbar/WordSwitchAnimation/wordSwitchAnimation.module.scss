@@ -6,16 +6,19 @@
 
   div {
     font-size: 30px;
+    color: #fff;
   }
 }
 
 .title,
 .switchWord {
   padding-left: 10px;
-  color: #e36208;
+  // color: #e36208;
+  color: #2196f3;
   text-align: center;
   margin-bottom: 12px;
   padding-right: 6px;
+  font-weight: normal;
 }
 
 .title {
