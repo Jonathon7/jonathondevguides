@@ -5,7 +5,7 @@ UPDATE articles SET article_title = $1,
                 article_status = $6
                  WHERE id = $5;
 
-SELECT article_title
+SELECT id
 FROM articles
 WHERE id = $5;
 

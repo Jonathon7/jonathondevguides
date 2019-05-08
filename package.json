@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx webpack --config ./webpack/webpack.prod.js",
-    "start": "webpack-dev-server --open --hot --inline --config ./webpack/webpack.dev.js",
+    "start": "webpack-dev-server --hot --inline --config ./webpack/webpack.dev.js",
     "test": "jest"
   },
   "keywords": [],

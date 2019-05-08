@@ -16,7 +16,7 @@ const styleMap = {
     backgroundColor: "#f7f7f7",
     padding: "0px 6px",
     margin: "0px 1px",
-    color: "#e36208",
+    color: "#2196f3",
     borderRadius: "5px",
     fontFamily: "Inconsolata"
   }
@@ -31,23 +31,14 @@ const iframelyPlugin = createIframelyPlugin({
 });
 
 export default class ArticleBuilder extends Component {
-  constructor() {
-    super();
-    this.state = {
-      editorState: EditorState.createEmpty(),
-      plugins: [iframelyPlugin],
-      user: false,
-      articleId: null, // stores the id of the currently selected article
-      updatedArticle: false,
-      status: null
-    };
-
-    this.editor = React.createRef();
-    this.autoSaveArticles = setInterval(
-      () => this.postArticle(this.state.status),
-      5000
-    );
-  }
+  state = {
+    editorState: EditorState.createEmpty(),
+    plugins: [iframelyPlugin],
+    user: false,
+    articleId: null, // stores the id of the currently selected article
+    updatedArticle: false,
+    status: "saved"
+  };
 
   componentWillUnmount() {
     clearInterval(this.autoSaveArticles);
@@ -103,7 +94,6 @@ export default class ArticleBuilder extends Component {
      * @type {string} - holds the style format for the article changed from a JSON object to a string
      */
     let content = convertToRaw(this.state.editorState.getCurrentContent());
-
     if (
       content.blocks[0].type !== "header-one" ||
       content.blocks[1].type !== "header-two" ||
@@ -131,10 +121,11 @@ export default class ArticleBuilder extends Component {
       status: status
     });
 
-    if (article.data[0]) {
+    if (article.data) {
       this.setState(
         {
-          updatedArticle: true
+          updatedArticle: true,
+          articleId: article.data.id
         },
         () => {
           setTimeout(() => this.setState({ updatedArticle: false }), 2000);
@@ -176,18 +167,27 @@ export default class ArticleBuilder extends Component {
    * @param {Object} editorState - the style format information for the Editor component
    */
   onChange = editorState => {
+    this.postArticle(this.state.status);
+
     this.setState({
       editorState
     });
   };
 
   render() {
+    let newArticle;
+    let content = this.state.editorState.getCurrentContent();
+    console.log(content.blocks);
+    if (!content) {
+      newArticle = <div>New Article</div>;
+    }
     return (
       <div className={styles.articleBuilderCont}>
         <BlockStyleControls
           editorState={this.state.editorState}
           onToggle={this.toggleBlockType}
         />
+        {newArticle}
         <div className={styles.inputCont}>
           <Editor
             blockStyleFn={this.blockStyleFn}
@@ -197,7 +197,6 @@ export default class ArticleBuilder extends Component {
             handleKeyCommand={this.handleKeyCommand}
             spellCheck={true}
             plugins={this.state.plugins}
-            ref={this.editor}
           />
         </div>
         <ArchivedArticles

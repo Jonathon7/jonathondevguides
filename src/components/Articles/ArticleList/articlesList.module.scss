@@ -1,5 +1,11 @@
 .articlesCont {
   width: fit-content;
-  margin: auto;
+  margin: 0 20%;
   padding-top: 50px;
+}
+
+@media (max-width: 968px) {
+  .articlesCont {
+    margin: 0;
+  }
 }

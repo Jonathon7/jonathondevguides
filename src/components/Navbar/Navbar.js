@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styles from "./navbar.module.scss";
 import propTypes from "prop-types";
-import searchIcon from "../../images/search.png";
-import SearchBar from "../SearchBar/SearchBar";
 import getSearchResults from "./AsyncFunctions/getSearchResults";
 import getUser from "./AsyncFunctions/getUser";
-import WordSwitchAnimation from "./WordSwitchAnimation/WordSwitchAnimation";
 
 export default class Navbar extends Component {
   state = {
@@ -62,41 +59,6 @@ export default class Navbar extends Component {
   };
 
   render() {
-    let displaySearchBar; // holds the jsx for what is displayed as the search bar
-
-    /**
-     * @param {boolean} this.state.searchBar - determines if the search bar is displayed or not
-     * @prop {function} search - the function that is called every keypress
-     * @prop {function} toggleSearchBar - the function called with an onclick event
-     * @prop {Array} searchResults - passes the searchResults array from state to the SearchBar component
-     */
-    switch (this.state.searchBar) {
-      case true:
-        displaySearchBar = (
-          <SearchBar
-            searchInputValue={this.searchInputValue}
-            search={this.search}
-            toggleSearchBar={this.toggleSearchBar}
-            searchResults={this.state.searchResults}
-          />
-        );
-        break;
-      case false:
-        displaySearchBar = (
-          <div className={styles.searchBar}>
-            <img
-              src={searchIcon}
-              alt="Search Icon"
-              onClick={e => {
-                this.toggleSearchBar(e);
-              }}
-            />
-          </div>
-        );
-        break;
-      default:
-        return null;
-    }
     return (
       <div className={styles.navCont}>
         <div
@@ -112,9 +74,11 @@ export default class Navbar extends Component {
           <Link to="/" className={styles.link}>
             Jonathon Flores
           </Link>
-          <WordSwitchAnimation />
+          <div className={styles.cont}>
+            <div>/</div>
+            <p className={styles.title}>Web Developer</p>
+          </div>
         </div>
-        {/* {displaySearchBar} */}
       </div>
     );
   }

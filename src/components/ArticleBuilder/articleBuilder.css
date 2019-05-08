@@ -33,23 +33,14 @@
   overflow: auto;
 }
 
-.DraftEditor-root figure iframe {
-  width: 200%;
-}
-
 iframe {
   width: 110% !important;
   left: -40px !important;
   overflow: auto !important;
-  position: absolute !important;
+  -webkit-overflow-scrolling: touch !important;
 }
 
 @media (max-width: 700px) {
-  .title,
-  .header {
-    /* font-family: "Proxima Nova W05 Regular"; */
-  }
-
   .title {
     font-size: 30px;
     line-height: 40px;
@@ -60,8 +51,23 @@ iframe {
     line-height: 35px;
   }
 
+  .title,
+  .header {
+    color: #000;
+  }
+
   .date,
   .paragraph {
     font-size: 18px;
+  }
+
+  iframe {
+    width: 120% !important;
+  }
+}
+
+@media (max-width: 400px) {
+  iframe {
+    width: 130% !important;
   }
 }
