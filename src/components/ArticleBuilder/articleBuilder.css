@@ -36,8 +36,15 @@
 iframe {
   width: 110% !important;
   left: -40px !important;
-  overflow: auto !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: 0 !important;
   -webkit-overflow-scrolling: touch !important;
+  overflow-y: scroll !important;
+}
+
+iframe:last-child {
+  position: static;
 }
 
 @media (max-width: 700px) {
