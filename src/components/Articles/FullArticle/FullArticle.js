@@ -101,7 +101,14 @@ export default class FullArticle extends Component {
         ) : null}
         <br /> <br />
         <hr />
-        <DisqusThread style={{ paddingTop: "30px" }} />
+        {this.state.article[0] && (
+          <DisqusThread
+            style={{ paddingTop: "30px" }}
+            id={this.state.article[0].id.toString()}
+            title={this.state.article[0].article_title}
+            path={this.props.location.pathname}
+          />
+        )}
         <br /> <br />
       </div>
     );
