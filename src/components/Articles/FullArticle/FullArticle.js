@@ -82,22 +82,9 @@ export default class FullArticle extends Component {
   getEditorState = rawContent => {
     const content = convertFromRaw(JSON.parse(rawContent));
 
-    this.setState(
-      {
-        editorState: EditorState.createWithContent(content)
-      },
-      () => this.responsiveIframes()
-    );
-  };
-
-  responsiveIframes = () => {
-    let iframes = document.querySelectorAll("iframe");
-
-    for (let i = 0; i < iframes.length; i++) {
-      iframes[i].parentNode.style.position = "relative";
-      iframes[i].parentNode.style.overflow = "hidden";
-      console.log(iframes[i].parentNode.style);
-    }
+    this.setState({
+      editorState: EditorState.createWithContent(content)
+    });
   };
 
   render() {
