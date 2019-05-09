@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import styles from "./fullArticle.module.scss";
 import getFullArticle from "../AsyncFunctions/getFullArticle";
-import Draft, { convertFromRaw, EditorState } from "draft-js";
+import { convertFromRaw, EditorState } from "draft-js";
 import Editor from "draft-js-plugins-editor";
-import Immutable from "immutable";
 import DisqusThread from "../DisqusThread/DisqusThread";
 import createIframelyPlugin from "@jimmycode/draft-js-iframely-plugin";
 import "@jimmycode/draft-js-iframely-plugin/lib/plugin.css";
@@ -26,23 +25,6 @@ const iframelyPlugin = createIframelyPlugin({
     handleOnPaste: true
   }
 });
-
-class Embeddediframe extends Component {
-  render() {
-    return <div className={"iframe-cont"}>{this.props.children}</div>;
-  }
-}
-
-const blockRenderMap = Immutable.Map({
-  Embeddediframe: {
-    element: "div",
-    wrapper: <Embeddediframe />
-  }
-});
-
-const extendedBlockRenderMap = Draft.DefaultDraftBlockRenderMap.merge(
-  blockRenderMap
-);
 
 export default class FullArticle extends Component {
   state = {
@@ -99,10 +81,23 @@ export default class FullArticle extends Component {
    */
   getEditorState = rawContent => {
     const content = convertFromRaw(JSON.parse(rawContent));
-    console.log(content);
-    this.setState({
-      editorState: EditorState.createWithContent(content)
-    });
+
+    this.setState(
+      {
+        editorState: EditorState.createWithContent(content)
+      },
+      () => this.responsiveIframes()
+    );
+  };
+
+  responsiveIframes = () => {
+    let iframes = document.querySelectorAll("iframe");
+
+    for (let i = 0; i < iframes.length; i++) {
+      iframes[i].parentNode.style.position = "relative";
+      iframes[i].parentNode.style.overflow = "hidden";
+      console.log(iframes[i].parentNode.style);
+    }
   };
 
   render() {
@@ -115,7 +110,6 @@ export default class FullArticle extends Component {
             blockStyleFn={this.blockStyleFn}
             customStyleMap={styleMap}
             plugins={this.state.plugins}
-            blockRenderMap={extendedBlockRenderMap}
           />
         ) : null}
         <br /> <br />
