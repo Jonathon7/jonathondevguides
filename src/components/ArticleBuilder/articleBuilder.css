@@ -33,18 +33,18 @@
   overflow: auto;
 }
 
-iframe {
-  width: 110% !important;
-  left: -40px !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  top: 0 !important;
-  -webkit-overflow-scrolling: touch !important;
-  overflow-y: scroll !important;
+.iframe-cont {
+  position: relative;
+  overflow: hidden;
+  background: red;
 }
 
-iframe:last-child {
-  position: static;
+iframe {
+  position: absolute !important;
+  width: 110% !important;
+  left: -40px !important;
+  border: 0 !important;
+  top: 0 !important;
 }
 
 @media (max-width: 700px) {

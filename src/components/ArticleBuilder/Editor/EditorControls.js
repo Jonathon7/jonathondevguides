@@ -10,9 +10,9 @@ const BLOCK_TYPES = [
   { label: "Date", style: "header-two" },
   { label: "Header", style: "header-three" },
   { label: "Paragraph", style: "paragraph" },
-  { label: "Code Block", style: "code-block" },
   { label: "UL", style: "unordered-list-item" },
-  { label: "OL", style: "ordered-list-item" }
+  { label: "OL", style: "ordered-list-item" },
+  { label: "Embeddediframe", style: "Embeddediframe" }
 ];
 
 export default function BlockStyleControls(props) {

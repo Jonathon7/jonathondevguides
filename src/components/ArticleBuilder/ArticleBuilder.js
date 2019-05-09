@@ -5,7 +5,13 @@ import ArchivedArticles from "./ArchivedArticles/ArchivedArticles";
 import BlockStyleControls from "./Editor/EditorControls";
 import postArticle from "./AsyncFunctions/postArticle";
 import Editor from "draft-js-plugins-editor";
-import { EditorState, RichUtils, convertToRaw, convertFromRaw } from "draft-js";
+import Draft, {
+  EditorState,
+  RichUtils,
+  convertToRaw,
+  convertFromRaw
+} from "draft-js";
+import Immutable from "immutable";
 import getUser from "../Navbar/AsyncFunctions/getUser";
 
 import createIframelyPlugin from "@jimmycode/draft-js-iframely-plugin";
@@ -29,6 +35,36 @@ const iframelyPlugin = createIframelyPlugin({
     handleOnPaste: true
   }
 });
+
+class Embeddediframe extends Component {
+  render() {
+    return <div className={"iframe-cont"}>{this.props.children}</div>;
+  }
+}
+
+const blockRenderMap = Immutable.Map({
+  Embeddediframe: {
+    element: "div",
+    wrapper: <Embeddediframe />
+  }
+});
+
+const extendedBlockRenderMap = Draft.DefaultDraftBlockRenderMap.merge(
+  blockRenderMap
+);
+
+// function myBlockRenderer(contentBlock) {
+//   const type = contentBlock.getType();
+//   if (type === "iframe") {
+//     return {
+//       component: Embeddediframe,
+//       editable: true,
+//       props: {
+//         iframes: contentBlock.getText()
+//       }
+//     };
+//   }
+// }
 
 export default class ArticleBuilder extends Component {
   state = {
@@ -175,19 +211,12 @@ export default class ArticleBuilder extends Component {
   };
 
   render() {
-    let newArticle;
-    let content = this.state.editorState.getCurrentContent();
-    console.log(content.blocks);
-    if (!content) {
-      newArticle = <div>New Article</div>;
-    }
     return (
       <div className={styles.articleBuilderCont}>
         <BlockStyleControls
           editorState={this.state.editorState}
           onToggle={this.toggleBlockType}
         />
-        {newArticle}
         <div className={styles.inputCont}>
           <Editor
             blockStyleFn={this.blockStyleFn}
@@ -197,6 +226,7 @@ export default class ArticleBuilder extends Component {
             handleKeyCommand={this.handleKeyCommand}
             spellCheck={true}
             plugins={this.state.plugins}
+            blockRenderMap={extendedBlockRenderMap}
           />
         </div>
         <ArchivedArticles

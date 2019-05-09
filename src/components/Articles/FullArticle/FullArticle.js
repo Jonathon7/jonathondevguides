@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import styles from "./fullArticle.module.scss";
 import getFullArticle from "../AsyncFunctions/getFullArticle";
-import { convertFromRaw, EditorState } from "draft-js";
+import Draft, { convertFromRaw, EditorState } from "draft-js";
 import Editor from "draft-js-plugins-editor";
+import Immutable from "immutable";
 import DisqusThread from "../DisqusThread/DisqusThread";
 import createIframelyPlugin from "@jimmycode/draft-js-iframely-plugin";
 import "@jimmycode/draft-js-iframely-plugin/lib/plugin.css";
@@ -25,6 +26,23 @@ const iframelyPlugin = createIframelyPlugin({
     handleOnPaste: true
   }
 });
+
+class Embeddediframe extends Component {
+  render() {
+    return <div className={"iframe-cont"}>{this.props.children}</div>;
+  }
+}
+
+const blockRenderMap = Immutable.Map({
+  Embeddediframe: {
+    element: "div",
+    wrapper: <Embeddediframe />
+  }
+});
+
+const extendedBlockRenderMap = Draft.DefaultDraftBlockRenderMap.merge(
+  blockRenderMap
+);
 
 export default class FullArticle extends Component {
   state = {
@@ -97,6 +115,7 @@ export default class FullArticle extends Component {
             blockStyleFn={this.blockStyleFn}
             customStyleMap={styleMap}
             plugins={this.state.plugins}
+            blockRenderMap={extendedBlockRenderMap}
           />
         ) : null}
         <br /> <br />
