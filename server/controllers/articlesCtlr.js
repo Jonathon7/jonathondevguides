@@ -23,11 +23,19 @@ const getArticle = (req, res) => {
     });
 };
 
-const postArticle = async (req, res) => {
+const saveArticle = async (req, res) => {
   const db = req.app.get("db");
   const existingArticle = await db.search_existing_article([req.body.id]);
-  if (existingArticle[0]) {
-    let updatedArticle = db.update_article([
+
+  if (
+    existingArticle[0].article_status === "published" &&
+    req.body.status === "published"
+  ) {
+    return res
+      .status(200)
+      .json({ message: "This Article is already published" });
+  } else {
+    const updatedArticle = await db.update_article([
       req.body.title,
       req.body.date,
       req.body.description,
@@ -35,31 +43,50 @@ const postArticle = async (req, res) => {
       req.body.id,
       req.body.status
     ]);
+    if (
+      existingArticle[0].article_status === "published" &&
+      updatedArticle[0].article_status === "saved"
+    ) {
+      updatedArticle[0].message =
+        "This article has been changed and needs to be re-published to be seen by the public";
+    }
+
     res.status(200).json(updatedArticle[0]);
-  } else {
-    db.post_article([
-      req.body.title,
-      req.body.date,
-      req.body.description,
-      req.body.content,
-      req.body.status
-    ]).then(response => {
-      console.log(response);
-      res.status(200).json(response[0]);
-    });
   }
 };
 
-getSearchResults = (req, res) => {
+const createArticle = async (req, res) => {
   const db = req.app.get("db");
 
-  db.search_article(["%" + req.params.words + "%"])
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  const { title, date, description, content } = req.body;
+
+  const id = await db.create_article([
+    title,
+    date,
+    description,
+    content,
+    req.session.user.username
+  ]);
+
+  res.status(200).json(id[0].id);
+};
+
+const publishArticle = async (req, res) => {
+  const db = req.app.get("db");
+
+  const existingArticle = await db.search_existing_article([req.body.id]);
+
+  if (existingArticle) return;
+
+  db.post_article([
+    req.body.title,
+    req.body.date,
+    req.body.description,
+    req.body.content,
+    req.body.status
+  ]).then(response => {
+    res.status(200).json(response[0]);
+  });
 };
 
 const deleteArticle = (req, res) => {
@@ -77,7 +104,8 @@ const deleteArticle = (req, res) => {
 module.exports = {
   getArticles,
   getArticle,
-  postArticle,
-  getSearchResults,
-  deleteArticle
+  deleteArticle,
+  saveArticle,
+  createArticle,
+  publishArticle
 };

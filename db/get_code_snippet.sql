@@ -1,0 +1,1 @@
+SELECT * FROM code_snippets WHERE id = $1;

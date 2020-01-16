@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import axios from "axios";
+import styles from "./login.module.scss";
 
 export default class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    login: true
   };
 
   handleChange = val => {
@@ -13,19 +14,72 @@ export default class Login extends Component {
     });
   };
 
-  handleClick = async () => {
-    const { username, password } = this.state;
-    await axios.post("/api/login", { username, password });
-
-    this.props.history.push("/");
+  toggleLoginSignup = () => {
+    this.setState({
+      login: !this.state.login
+    });
   };
 
   render() {
     return (
-      <div>
-        <input type="text" name="username" onChange={this.handleChange} />
-        <input type="password" name="password" onChange={this.handleChange} />
-        <button onClick={this.handleClick}>Login</button>
+      <div
+        className={styles.loginCont}
+        style={{
+          backgroundColor: this.state.login ? "#2196f3" : "#ED9B62",
+          transition: ".2s"
+        }}
+      >
+        <div className={styles.buttonsCont}>
+          <button
+            style={{
+              backgroundColor: !this.state.login && "#fff",
+              color: !this.state.login && "#000",
+              boxShadow:
+                !this.state.login && "inset -2px 0px 1px 0px rgba(0,0,0,0.39)",
+              transition: ".2s"
+            }}
+            onClick={this.toggleLoginSignup}
+          >
+            Login
+          </button>
+          <button
+            style={{
+              backgroundColor: this.state.login ? "#fff" : "#ED9B62",
+              color: this.state.login && "#000",
+              boxShadow:
+                this.state.login && "inset 2px 0px 1px 0px rgba(0,0,0,0.39)",
+              transition: ".2s"
+            }}
+            onClick={this.toggleLoginSignup}
+          >
+            Signup
+          </button>
+        </div>
+        <div className={styles.inputFields}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={this.handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={this.handleChange}
+          />
+          <button
+            onClick={() =>
+              this.props.loginOrSignup(
+                this.state.username,
+                this.state.password,
+                this.state.login
+              )
+            }
+          >
+            {this.state.login ? "Login" : "Signup"}
+          </button>
+        </div>
       </div>
     );
   }

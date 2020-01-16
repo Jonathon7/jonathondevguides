@@ -1,0 +1,70 @@
+.loginCont {
+  position: fixed;
+  z-index: 10;
+  left: calc(50% - 200px);
+  top: calc(50% - 125px);
+  width: 420px;
+  height: 270px;
+  background: black;
+  border-radius: 2px;
+  animation: slide-in 0.5s linear;
+}
+
+.buttonsCont {
+  button {
+    background: none;
+    outline: none;
+    border: none;
+    color: #fff;
+    width: 50%;
+    font-size: 16px;
+    padding: 10px;
+  }
+}
+
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+
+  input {
+    margin: 10px;
+    width: 300px;
+    height: 25px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: solid 1px #fff;
+    color: #fff;
+    font-size: 15px;
+  }
+
+  input::placeholder {
+    font-size: 15px;
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  button {
+    width: 312px;
+    height: 30px;
+    margin: 20px;
+    background-color: #fff;
+    color: #000;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0.2;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+  }
+}

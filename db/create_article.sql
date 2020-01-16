@@ -1,5 +1,5 @@
 INSERT INTO articles
-    (article_title, date_posted, article_description ,article_content, article_status)
+    (article_title, date_posted, article_description ,article_content, author)
 VALUES($1, $2, $3, $4, $5);
 
 SELECT id

@@ -24,12 +24,28 @@ getUser = (req, res) => {
 const signupUser = async (req, res) => {
   const db = req.app.get("db");
 
-  const pass = await bcrypt.hash(req.body.password, 12);
-  db.add_user([req.body.username, pass]);
+  const getUser = await db.get_user([req.body.username]);
+  const user = getUser[0];
+
+  if (user) {
+    return res.status(409).json("Username Taken");
+  } else {
+    const password = await bcrypt.hash(req.body.password, 12);
+    db.add_user([req.body.username, password]);
+  }
+
+  res.sendStatus(200);
+};
+
+logoutUser = (req, res) => {
+  req.session.destroy();
+
+  res.sendStatus(200);
 };
 
 module.exports = {
   loginUser,
   signupUser,
-  getUser
+  getUser,
+  logoutUser
 };

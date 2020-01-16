@@ -1,6 +1,10 @@
 require("@babel/polyfill");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+
+const env = dotenv.config().parsed;
 
 module.exports = {
   context: path.resolve(__dirname, "../src"),
@@ -68,6 +72,9 @@ module.exports = {
       template: "./index.html",
       filename: "./index.html",
       inject: false
+    }),
+    new webpack.DefinePlugin({
+      "process.env.iFRAMELY_PLUGIN": JSON.stringify(env.iFRAMELY_PLUGIN)
     })
   ]
 };

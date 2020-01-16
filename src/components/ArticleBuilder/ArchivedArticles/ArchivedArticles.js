@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import styles from "./archivedArticles.module.scss";
-import ArchiveButtons from "./ArchiveButtons/ArchiveButtons";
 import ShowArticleButtons from "./ShowArticleButtons/ShowArticleButtons";
 import SavedArticles from "./SavedArticles/SavedArticles";
 import PublishedArticles from "./PublishedArticles/PublishedArticles";
-import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
 import getArticles from "../../Articles/AsyncFunctions/getArticles";
+import SideToolbar from "./SideToolbar/SideToolbar";
 
 export default class ArchivedArticles extends Component {
   state = {
     savedArticles: [],
     publishedArticles: [],
-    showArticles: "saved",
-    displayConfirmation: false // determines if the confirmation modal is displayed
+    showArticles: "saved" // determines which articles ar displayed, either saved or published
   };
 
   componentDidMount() {
@@ -26,8 +24,8 @@ export default class ArchivedArticles extends Component {
   }
 
   getArticles = async () => {
-    let savedArticles = await getArticles("saved");
-    let publishedArticles = await getArticles("published");
+    const savedArticles = await getArticles("saved");
+    const publishedArticles = await getArticles("published");
 
     this.setState({
       savedArticles,
@@ -41,38 +39,35 @@ export default class ArchivedArticles extends Component {
     });
   };
 
-  showConfirmationModal = () => {
-    this.setState({
-      displayConfirmation: true
-    });
-  };
-
   render() {
     return (
       <div className={styles.archivedArticlesCont}>
-        <ArchiveButtons
-          postArticle={this.props.postArticle}
-          getArticles={this.getArticles}
-        />
-        <ShowArticleButtons
-          showArticles={this.showArticles}
-          active={this.state.showArticles === "saved"}
-        />
-        {this.state.showArticles === "saved" ? (
-          <SavedArticles
-            savedArticles={this.state.savedArticles}
-            editArticle={this.props.editArticle}
-            showMoreOptions={this.showMoreOptions}
+        <div className={styles.buttonsWithArticlesCont}>
+          <SideToolbar
+            collapseSidebar={this.props.collapseSidebar}
+            toggleNewArticleModal={this.props.toggleNewArticleModal}
           />
-        ) : (
-          <PublishedArticles
-            publishedArticles={this.state.publishedArticles}
-            editArticle={this.props.editArticle}
-            showMoreOptions={this.showMoreOptions}
-            getArticles={this.getArticles}
+          <ShowArticleButtons
+            showArticles={this.showArticles}
+            active={this.state.showArticles === "saved"}
           />
-        )}
-        {this.state.displayConfirmation && <ConfirmationModal />}
+          {this.state.showArticles === "saved" ? (
+            <SavedArticles
+              savedArticles={this.state.savedArticles}
+              editArticle={this.props.editArticle}
+              showMoreOptions={this.showMoreOptions}
+              articleId={this.props.articleId}
+            />
+          ) : (
+            <PublishedArticles
+              publishedArticles={this.state.publishedArticles}
+              editArticle={this.props.editArticle}
+              showMoreOptions={this.showMoreOptions}
+              getArticles={this.getArticles}
+              articleId={this.props.articleId}
+            />
+          )}
+        </div>
       </div>
     );
   }

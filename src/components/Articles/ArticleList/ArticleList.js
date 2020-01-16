@@ -3,7 +3,6 @@ import ArticleListTemplate from "../ArticleListTemplate/ArticleListTemplate";
 import styles from "./articlesList.module.scss";
 import getArticles from "../AsyncFunctions/getArticles";
 import propTypes from "prop-types";
-// import Canvas from '../'
 
 class ArticleList extends Component {
   state = {
@@ -38,6 +37,7 @@ class ArticleList extends Component {
           <ArticleListTemplate
             key={article.id}
             title={article.article_title}
+            author={article.author}
             date={article.date_posted}
             description={article.article_description}
             src={article.article_image}

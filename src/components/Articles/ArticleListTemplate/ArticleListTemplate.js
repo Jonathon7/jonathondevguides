@@ -15,7 +15,8 @@ export default function ArticleListTemplate(props) {
       <div className={styles.articleCont}>
         <div>
           <h1>{props.title}</h1>
-          <p>{props.date}</p>
+          <p>By {props.author}</p>
+          <p className={styles.date}>{props.date}</p>
           <h3>{props.description}</h3>
         </div>
       </div>

@@ -20,6 +20,7 @@ export default class ArticlesTemplate extends Component {
       <div
         className={styles.articleTemplateCont}
         onClick={this.props.editArticle}
+        style={{ background: this.props.active && "#eeeeee" }}
       >
         <h3>{this.props.title}</h3>
         <p>{this.props.date}</p>

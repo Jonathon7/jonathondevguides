@@ -1,12 +1,35 @@
 .articleBuilderCont {
   display: flex;
-  justify-content: center;
-  padding-top: 20px;
+  justify-content: space-between;
   min-height: 272px;
 }
 
-.inputCont {
+.editorContWithToolbar {
+  margin-top: 20px;
   border: solid 1px lightgray;
   width: 50vw;
-  padding-left: 10px;
+}
+
+.editorCont {
+  padding: 10px;
+}
+
+.collapseSidebarIcons {
+  height: 40px;
+  margin: 20px;
+
+  img {
+    height: 20px;
+    margin: 10px;
+    filter: grayscale(100%);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 1000px) {
+  .editorContWithToolbar {
+    min-width: 500px;
+    width: 500px;
+    overflow: scroll;
+  }
 }

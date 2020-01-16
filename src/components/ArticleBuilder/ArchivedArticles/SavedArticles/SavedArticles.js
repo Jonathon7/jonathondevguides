@@ -10,6 +10,7 @@ export default class SavedArticles extends Component {
           editArticle={() => this.props.editArticle(article)}
           title={article.article_title}
           date={article.date_posted}
+          active={article.id === this.props.articleId}
         />
       );
     });

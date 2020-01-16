@@ -6,10 +6,8 @@ import StyleButton from "./StyleButton";
  * @type {Array} holds the labels for the style buttons and types for the HTML tags
  */
 const BLOCK_TYPES = [
-  { label: "Title", style: "header-one" },
-  { label: "Date", style: "header-two" },
-  { label: "Header", style: "header-three" },
-  { label: "Paragraph", style: "paragraph" },
+  { label: "H1", style: "header-three" },
+  { label: "P", style: "paragraph" },
   { label: "UL", style: "unordered-list-item" },
   { label: "OL", style: "ordered-list-item" }
 ];

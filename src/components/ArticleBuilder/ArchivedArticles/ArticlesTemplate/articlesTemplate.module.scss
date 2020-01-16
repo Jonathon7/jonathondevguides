@@ -3,13 +3,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 10px;
+  margin-left: 5px;
   padding: 0px 8px;
-  border-bottom: solid 1px lightgray;
   cursor: pointer;
 
   h3 {
-    width: 190px;
+    border-left: solid 4px #2196f3;
+    padding-left: 10px;
+    width: 300px;
     color: #303030;
     font-weight: 400;
   }

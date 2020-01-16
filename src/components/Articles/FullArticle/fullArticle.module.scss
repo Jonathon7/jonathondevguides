@@ -9,6 +9,12 @@
   overflow: hidden;
 }
 
+@media (min-width: 1700px) {
+  .fullArticleCont {
+    width: 40vw;
+  }
+}
+
 @media (max-width: 980px) {
   .fullArticleCont {
     width: 70vw;

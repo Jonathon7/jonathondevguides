@@ -18,6 +18,7 @@ export default class PublishedArticles extends Component {
           title={article.article_title}
           date={article.date_posted}
           deleteArticle={() => this.deleteArticle(article.id)}
+          active={article.id === this.props.articleId}
         />
       );
     });

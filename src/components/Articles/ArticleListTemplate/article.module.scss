@@ -5,7 +5,7 @@
 
 .articleCont {
   width: 58vw;
-  height: 250px;
+  height: 260px;
   padding-bottom: 30px;
   display: flex;
   align-items: center;
@@ -16,7 +16,7 @@
   background: #fff;
 
   h1 {
-    font-size: 40px;
+    font-size: 33px;
     line-height: 50px;
     font-weight: normal;
     color: #303030;
@@ -28,7 +28,7 @@
     font-weight: 400;
   }
 
-  p {
+  .date {
     color: #2196f3;
   }
 
@@ -49,17 +49,69 @@
 
 @media (max-width: 968px) {
   .articleCont {
+    height: 250px;
     box-shadow: 0px 0px 0px 0px;
-    width: 90%;
-    height: 220px;
+    border-left: solid 4px #2196f3;
+    border-radius: 0;
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 30px;
+      line-height: 40px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 820px) {
   .articleCont {
+    height: 250px;
+
     h1 {
-      font-size: 30px;
+      font-size: 27px;
       line-height: 1.2;
+    }
+
+    h3 {
+      font-size: 17px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .articleCont {
+    height: 310px;
+
+    h1 {
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .articleCont {
+    height: 310px;
+    border-left: solid 3px #2196f3;
+
+    h1 {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    h3 {
+      font-size: 15px;
     }
   }
 }
